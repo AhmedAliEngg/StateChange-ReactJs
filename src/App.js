@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import { useState } from 'react';
+function sendMessage(message) {
+  // ...
+}
 function App() {
+  const [isSent, setIsSent] = useState(false);
+  const [message, setMessage] = useState('Hi');
+  if (isSent) {
+    return <h1>Your message is on its way!</h1>
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <form onSubmit={(e) => {
+      e.preventDefault();
+      setIsSent(true);
+      sendMessage(message);
+    }}>
+      <textarea
+        placeholder="Message"
+        value={message}
+        onChange={e => setMessage(e.target.value)}
+      />
+      <button type="submit">Send</button>
+    </form>
   );
 }
 
